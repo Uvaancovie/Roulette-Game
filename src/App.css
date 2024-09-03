@@ -39,3 +39,8 @@ canvas {
   border: 1px solid #ffd700;
   border-radius: 10px;
 }
+.popup img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}

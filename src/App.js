@@ -1,24 +1,79 @@
-import React, { useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import React, { useState } from 'react';
+import RouletteWheel from './components/RouletteWheel';
+import Controls from './components/Controls';
+import './App.css';
+import Confetti from 'react-confetti';
 
-function Model(props) {
-  const group = useRef();
-  const { nodes, materials } = useGLTF('/volkswagen_golf_gti.glb');
+function App() {
+  const [balance, setBalance] = useState(1000); // Starting balance
+  const [bet, setBet] = useState(null);
+  const [result, setResult] = useState(null);
+  const [popup, setPopup] = useState(null);
+
+  const handlePlaceBet = (amount) => {
+    setBet(amount);
+  };
+
+  const handleSpin = (result) => {
+    setResult(result);
+
+    if (Math.random() > 0.7 && result === parseInt(bet)) { // 30% chance to win
+      const winnings = 35 * bet; // 35:1 payout for a correct number
+      setBalance(balance + winnings);
+      setPopup('win');
+    } else {
+      setBalance(balance - bet);
+      setPopup('lose');
+    }
+  };
+
+  const resetGame = () => {
+    setBet(null);
+    setResult(null);
+    setPopup(null);
+  };
+
   return (
-    <group ref={group} {...props} dispose={null}>
-      <mesh geometry={nodes.car.geometry} material={materials.body} />
-    </group>
+    <div className="App">
+      <header className="casino-header">
+        <h1>Covies Casino</h1>
+      </header>
+      <div className="casino-banner">
+        <div className="spinning-icon">🎰</div>
+        <div className="spinning-icon">💰</div>
+        <div className="spinning-icon">🎲</div>
+      </div>
+      <RouletteWheel onSpin={handleSpin} />
+      <Controls
+        result={result}
+        bet={bet}
+        balance={balance}
+        setBalance={setBalance}
+        onPlaceBet={handlePlaceBet}
+        resetGame={resetGame}
+      />
+
+      {popup === 'win' && (
+        <div className="popup">
+          <Confetti />
+          <h2>Congratulations! You Won! 🚗 You could win a Volkswagen Golf GTI!</h2>
+          <img
+            src="https://images.unsplash.com/photo-1563720226710-d77dbb933a9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxOTk2M3wwfDF8c2VhcmNofDR8fHJlZCUyMGNhcnxlbnwwfHx8fDE2Njg1MDcyNTM&ixlib=rb-4.0.3&q=80&w=400"
+            alt="Volkswagen Golf GTI"
+            style={{ width: '100%', borderRadius: '10px', marginTop: '20px' }}
+          />
+          <button onClick={resetGame}>Spin Again</button>
+        </div>
+      )}
+
+      {popup === 'lose' && (
+        <div className="popup lose-popup">
+          <h2>Sorry, You Lost! But you are one spin away from a GTI! 🚗</h2>
+          <button onClick={resetGame}>Try Again</button>
+        </div>
+      )}
+    </div>
   );
 }
 
-export default function VolkswagenModel() {
-  return (
-    <Canvas style={{ height: '400px' }}>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} />
-      <Model />
-      <OrbitControls enableZoom={false} />
-    </Canvas>
-  );
-}
+export default App;
