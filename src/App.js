@@ -38,11 +38,25 @@ function App() {
       <header className="casino-header">
         <h1>Covies Casino</h1>
       </header>
+
+      <div className="interactive-section">
+        <h2>🎉 Spin to Win a GTI! 🚗</h2>
+        <a
+          href="https://unsplash.com/photos/red-car-passing-by-a-narrow-road-7xryii7XrS8"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="gti-link"
+        >
+          Click here to see the GTI
+        </a>
+      </div>
+
       <div className="casino-banner">
         <div className="spinning-icon">🎰</div>
         <div className="spinning-icon">💰</div>
         <div className="spinning-icon">🎲</div>
       </div>
+
       <RouletteWheel onSpin={handleSpin} />
       <Controls
         result={result}
