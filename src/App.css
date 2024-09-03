@@ -1,3 +1,37 @@
+/* Global Styles */
+body {
+  background-color: #000; /* Black background */
+  color: #ffd700; /* Gold color */
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  font-weight: 600;
+  color: #ffd700; /* Gold color */
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Header Styles */
+.casino-header {
+  background-color: #111; /* Darker black for the header */
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ffd700;
+}
+
+.casino-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
 /* Interactive Section Styles */
 .interactive-section {
   margin-top: 20px;
@@ -30,4 +64,148 @@
 
 .interactive-section .gti-link:hover {
   background-color: #e5c100; /* Slightly darker gold */
+}
+
+/* Banner with Spinning Icons */
+.casino-banner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.spinning-icon {
+  font-size: 3rem;
+  margin: 0 10px;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #111; /* Darker background for popups */
+  border: 2px solid #ffd700;
+  padding: 30px;
+  text-align: center;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.7);
+}
+
+.popup h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.popup img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.5);
+}
+
+.popup button {
+  padding: 12px 24px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+  background-color: #e5c100; /* Slightly darker gold */
+}
+
+.lose-popup {
+  animation: shake 0.5s ease;
+}
+
+/* Shake animation for losing popup */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+/* Control and Roulette Wheel Styles */
+button {
+  padding: 12px 24px;
+  margin: 10px;
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #e5c100; /* Slightly darker gold */
+}
+
+button:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+}
+
+input {
+  margin-right: 10px;
+  padding: 10px;
+  border: 2px solid #ffd700;
+  background-color: #000;
+  color: #ffd700;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 5px;
+}
+
+input::placeholder {
+  color: #ffd700;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 5px #ffd700;
+}
+
+.roulette-wheel {
+  width: 250px;
+  height: 250px;
+  border: 10px solid #ffd700; /* Gold border */
+  border-radius: 50%;
+  margin: 20px auto;
+  position: relative;
+  background: conic-gradient(#ff6347, #000, #228b22); /* Red, black, and green sections */
+}
+
+.spinning {
+  animation: spin 3s ease-out infinite;
+}
+
+.number-display {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffd700;
+  font-size: 24px;
+  font-weight: bold;
 }
